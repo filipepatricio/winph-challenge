@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioThingPink.Windows", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioThingPink.WindowsPhone", "DesafioThingPink\DesafioThingPink.WindowsPhone\DesafioThingPink.WindowsPhone.csproj", "{7AAAC019-5844-4797-AB59-5EF51625CA7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IscteDemo", "..\..\IscteDemo\IscteDemo\IscteDemo.csproj", "{ED6E8857-C520-4342-8BE7-3799285DD444}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DesafioThingPink\DesafioThingPink.Shared\DesafioThingPink.Shared.projitems*{a4f7c092-d7be-4ab4-9384-cc19370e1676}*SharedItemsImports = 13
@@ -72,6 +74,26 @@ Global
 		{7AAAC019-5844-4797-AB59-5EF51625CA7E}.Release|x86.ActiveCfg = Release|x86
 		{7AAAC019-5844-4797-AB59-5EF51625CA7E}.Release|x86.Build.0 = Release|x86
 		{7AAAC019-5844-4797-AB59-5EF51625CA7E}.Release|x86.Deploy.0 = Release|x86
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|ARM.ActiveCfg = Debug|ARM
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|ARM.Build.0 = Debug|ARM
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|ARM.Deploy.0 = Debug|ARM
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|x86.ActiveCfg = Debug|x86
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|x86.Build.0 = Debug|x86
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Debug|x86.Deploy.0 = Debug|x86
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|ARM.ActiveCfg = Release|ARM
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|ARM.Build.0 = Release|ARM
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|ARM.Deploy.0 = Release|ARM
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|x64.ActiveCfg = Release|Any CPU
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|x86.ActiveCfg = Release|x86
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|x86.Build.0 = Release|x86
+		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

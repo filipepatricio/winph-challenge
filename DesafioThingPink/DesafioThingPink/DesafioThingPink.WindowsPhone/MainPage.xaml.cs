@@ -22,11 +22,15 @@ namespace DesafioThingPink
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        ApiRequests apiRequests;
+
         public MainPage()
         {
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            apiRequests = new ApiRequests();
         }
 
         /// <summary>
@@ -43,6 +47,11 @@ namespace DesafioThingPink
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            //apiRequests.GetInstaImages(41.1462127, -8.6064951, 1395014400, 1395097200);
         }
     }
 }
