@@ -8,6 +8,27 @@
     x:Class="DesafioThingPink.MainPage"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Page.Resources>
+		<FontFamily x:Key="ContentControlThemeFontFamily">Segoe WP</FontFamily>
+		<x:Double x:Key="ControlContentThemeFontSize">12</x:Double>
+		<Thickness x:Key="ListViewItemMargin">0</Thickness>
+		<SolidColorBrush x:Key="CheckBoxBackgroundThemeBrush" Color="Transparent"/>
+		<x:Double x:Key="CheckBoxBorderThemeThickness">2.5</x:Double>
+		<x:Double x:Key="ListViewItemContentOffsetX">-40.5</x:Double>
+		<Thickness x:Key="ListViewItemMultiselectCheckBoxMargin">0,9.5,0,0</Thickness>
+		<Thickness x:Key="GridViewItemMultiselectBorderThickness">2.5</Thickness>
+		<x:Double x:Key="ListViewItemDisabledThemeOpacity">0.55</x:Double>
+		<x:Double x:Key="ListViewItemContentTranslateX">40.5</x:Double>
+		<x:Double x:Key="ListViewItemReorderHintThemeOffset">32</x:Double>
+		<DataTemplate x:Key="DataTemplate1">
+			<Grid>
+				<StackPanel>
+                    <Image Height="200" Source="{Binding image}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding autor}" FontSize="26.667" FontFamily="Segoe UI Semilight"/>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
+	</Page.Resources>
 
 	<Grid>
 		<Pivot Title="InstaLocation">
@@ -28,6 +49,11 @@
 							<Button x:Name="SearchButton" Content="Pesquisar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
 						</Grid>
 					</ScrollViewer>
+					<ListView x:Name="ImageList" Margin="0,170,0,0" SelectionMode="None" ItemsSource="{Binding}" ItemTemplate="{StaticResource DataTemplate1}"  >
+						<ListView.Header>
+						Header
+						</ListView.Header>
+					</ListView>
 				</Grid>
 			</PivotItem>
 			<PivotItem x:Name="MapPivot" Header="Mapa">

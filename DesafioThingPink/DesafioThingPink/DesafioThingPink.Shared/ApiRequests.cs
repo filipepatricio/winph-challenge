@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DesafioThingPink
 {
@@ -18,7 +19,7 @@ namespace DesafioThingPink
         private const string API_GOOGLE_MAPS = "http://maps.google.com/maps/api";
         private const string GOOGLE_MAPS_SEARCH = "/geocode/json";
 
-        private static string GetResponseContent(HttpWebResponse response)
+        public static string GetResponseContent(HttpWebResponse response)
         {
             Stream responseStream = response.GetResponseStream();
             StreamReader readStream = new StreamReader(responseStream, Encoding.UTF8);
@@ -26,7 +27,7 @@ namespace DesafioThingPink
             return responseContent;
         }
 
-        public void GetInstaImages(double lat, double lng, double min_timestamp, double max_timestamp)
+        public async Task<string> GetInstaImages(double lat, double lng, double min_timestamp, double max_timestamp, AsyncCallback callback)
         {
             string url = String.Format("{0}{1}?lat={2}&lng={3}&min_timestamp={4}&max_timestamp={5}&client_id={6}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), min_timestamp.ToString(), max_timestamp.ToString(), INSTA_CLIENT_ID);
 
@@ -34,42 +35,18 @@ namespace DesafioThingPink
             //request.Headers[x_api_key] = APP_ID;
             request.Method = "GET";
 
-            request.BeginGetResponse(InstaImagesCallback, request);
+            HttpWebResponse response = (HttpWebResponse) await request.GetResponseAsync();
+
+            string response_string = ApiRequests.GetResponseContent(response);
+
+            //Debug.WriteLine(response_string);
+
+            return response_string;
+
+
+
         }
 
-        private void InstaImagesCallback(IAsyncResult ar)
-        {
-            HttpWebRequest request = (HttpWebRequest)ar.AsyncState;
-            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(ar);
 
-            try
-            {
-                string response_string = GetResponseContent(response);
-                Debug.WriteLine(response_string);
-                //WeatherResponse forecastResponse = JsonUtil.Deserialize<WeatherResponse>(response_string);
-
-                //lat = forecastResponse.city.coord.lat;
-                //lon = forecastResponse.city.coord.lon;
-                //Deployment.Current.Dispatcher.BeginInvoke(() =>
-                //{
-                //    map.Center = new System.Device.Location.GeoCoordinate(lat, lon);
-                //    map.ZoomLevel = 10;
-                //});
-
-
-                //GetForecast(response_string);
-
-                //apiCall.GetSevenDaysForecastByCoords(lat, lon, SevenDaysForecastCallBack);
-
-            }
-            catch (WebException webex)
-            {
-                Debug.WriteLine(response.StatusCode);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-        }
     }
 }

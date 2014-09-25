@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,6 +26,10 @@ namespace DesafioThingPink
     public sealed partial class MainPage : Page
     {
         ApiRequests apiRequests;
+        ObservableImageItems insta_image_collection;
+
+        double lat, lng;
+        double min_timestamp, max_timestamp;
 
         public MainPage()
         {
@@ -31,6 +38,7 @@ namespace DesafioThingPink
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             apiRequests = new ApiRequests();
+
         }
 
         /// <summary>
@@ -49,9 +57,65 @@ namespace DesafioThingPink
             // this event is handled for you.
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            //apiRequests.GetInstaImages(41.1462127, -8.6064951, 1395014400, 1395097200);
+            lat = 41.1462127; //Google maps Request
+            lng = -8.6064951; //Google maps Request
+            min_timestamp = 1395014400;
+            max_timestamp = 1395097200;
+
+            string insta_images_response = await apiRequests.GetInstaImages(lat, lng, min_timestamp, max_timestamp, InstaImagesCallback);
+
+            Debug.WriteLine(insta_images_response);
+
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            {
+
+                InstaRootObject insta_root = JsonUtil.Deserialize<InstaRootObject>(insta_images_response);
+
+                insta_image_collection = new ObservableImageItems(insta_root.data);
+                ImageList.ItemsSource = insta_image_collection;
+            });
+        }
+
+        private async void InstaImagesCallback(IAsyncResult ar)
+        {
+            HttpWebRequest request = (HttpWebRequest)ar.AsyncState;
+            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(ar);
+
+            try
+            {
+
+                
+
+
+
+                //ImageList.ItemsSource = insta_image_collection;
+
+                //WeatherResponse forecastResponse = JsonUtil.Deserialize<WeatherResponse>(response_string);
+
+                //lat = forecastResponse.city.coord.lat;
+                //lon = forecastResponse.city.coord.lon;
+                //Deployment.Current.Dispatcher.BeginInvoke(() =>
+                //{
+                //    map.Center = new System.Device.Location.GeoCoordinate(lat, lon);
+                //    map.ZoomLevel = 10;
+                //});
+
+
+                //GetForecast(response_string);
+
+                //apiCall.GetSevenDaysForecastByCoords(lat, lon, SevenDaysForecastCallBack);
+
+            }
+            catch (WebException webex)
+            {
+                Debug.WriteLine(response.StatusCode);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }
