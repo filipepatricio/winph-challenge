@@ -16,8 +16,9 @@ namespace DesafioThingPink
         private const string API_INSTAGRAM_URL = "https://api.instagram.com/v1";
         private const string INSTA_SEARCH_URL = "/media/search";
         private const string INSTA_CLIENT_ID = "a2d145d8c2e248b786ac778920e0437e";
-        private const string API_GOOGLE_MAPS = "http://maps.google.com/maps/api";
-        private const string GOOGLE_MAPS_SEARCH = "/geocode/json";
+
+        private const string API_GOOGLE_MAPS_URL = "http://maps.google.com/maps/api";
+        private const string GOOGLE_MAPS_SEARCH_URL = "/geocode/json";
 
         public static string GetResponseContent(HttpWebResponse response)
         {
@@ -27,26 +28,31 @@ namespace DesafioThingPink
             return responseContent;
         }
 
-        public async Task<string> GetInstaImages(double lat, double lng, double min_timestamp, double max_timestamp, AsyncCallback callback)
+        public async Task<string> GetInstaImages(double lat, double lng, double min_timestamp, double max_timestamp)
         {
             string url = String.Format("{0}{1}?lat={2}&lng={3}&min_timestamp={4}&max_timestamp={5}&client_id={6}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), min_timestamp.ToString(), max_timestamp.ToString(), INSTA_CLIENT_ID);
+            return await DoRequest(url);
+        }
 
+        public async Task<string> GetGoogleCoords(string address)
+        {
+            string url = String.Format("{0}{1}?address={2}&sensor=false", API_GOOGLE_MAPS_URL, GOOGLE_MAPS_SEARCH_URL, address);
+            return await DoRequest(url);
+        }
+
+        private async Task<string> DoRequest(string url)
+        {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            //request.Headers[x_api_key] = APP_ID;
             request.Method = "GET";
 
-            HttpWebResponse response = (HttpWebResponse) await request.GetResponseAsync();
+            HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
 
             string response_string = ApiRequests.GetResponseContent(response);
 
             //Debug.WriteLine(response_string);
 
             return response_string;
-
-
-
         }
-
 
     }
 }

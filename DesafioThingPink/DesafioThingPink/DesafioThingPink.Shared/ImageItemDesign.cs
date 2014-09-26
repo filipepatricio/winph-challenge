@@ -58,8 +58,6 @@ namespace DesafioThingPink
             image = new BitmapImage(new Uri(insta_image_item.images.low_resolution.url, UriKind.Absolute));
             autor = insta_image_item.user.username;
 
-            //http://stackoverflow.com/questions/249760/how-to-convert-unix-timestamp-to-datetime-and-vice-versa
-
         }
 
 

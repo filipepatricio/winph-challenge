@@ -28,31 +28,33 @@
 				</StackPanel>
 			</Grid>
 		</DataTemplate>
+		<DataTemplate x:Key="DataTemplate2">
+			<Grid>
+				<TextBlock Text="{Binding SearchQueryText}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Semilight" FontSize="32"/>
+			</Grid>
+		</DataTemplate>
 	</Page.Resources>
 
 	<Grid>
 		<Pivot Title="InstaLocation">
 			<PivotItem x:Name="RecentSearchPivot" Header="Recentes">
 				<Grid>
-					<ListView/>
+					<ListView ItemTemplate="{StaticResource DataTemplate2}"/>
 				</Grid>
 			</PivotItem>
 			<PivotItem x:Name="SearchPivot" Header="Pesquisar">
-				<Grid>
-					<ScrollViewer>
-						<Grid VerticalAlignment="Top" Height="161">
-							<TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local"/>
-							<DatePicker x:Name="SinceDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,48,0,0"/>
-							<DatePicker x:Name="UntilDate" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,48,0,0"/>
-							<TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" Text="De" VerticalAlignment="Top" FontFamily="Global User Interface"/>
-							<TextBlock HorizontalAlignment="Right" Margin="0,62,120,0" TextWrapping="Wrap" Text="Até" VerticalAlignment="Top" FontFamily="Global User Interface"/>
-							<Button x:Name="SearchButton" Content="Pesquisar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
-						</Grid>
-					</ScrollViewer>
-					<ListView x:Name="ImageList" Margin="0,170,0,0" SelectionMode="None" ItemsSource="{Binding}" ItemTemplate="{StaticResource DataTemplate1}"  >
+                <Grid>
+                    <ListView x:Name="ImageList" SelectionMode="None" ItemsSource="{Binding}" ItemTemplate="{StaticResource DataTemplate1}"  >
 						<ListView.Header>
-						Header
-						</ListView.Header>
+                            <Grid VerticalAlignment="Top" Height="161">
+                                <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local"/>
+                                <DatePicker x:Name="SinceDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,48,0,0"/>
+                                <DatePicker x:Name="UntilDate" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,48,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" Text="De" VerticalAlignment="Top" FontFamily="Global User Interface"/>
+                                <TextBlock HorizontalAlignment="Right" Margin="0,62,120,0" TextWrapping="Wrap" Text="Até" VerticalAlignment="Top" FontFamily="Global User Interface"/>
+                                <Button x:Name="SearchButton" Content="Pesquisar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
+                            </Grid>
+                        </ListView.Header>
 					</ListView>
 				</Grid>
 			</PivotItem>
