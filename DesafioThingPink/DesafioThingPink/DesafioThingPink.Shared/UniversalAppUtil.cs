@@ -7,8 +7,8 @@ namespace DesafioThingPink
 {
     class UniversalAppUtil
     {
-        public static double DateTimeMinValue = DateTimeToUnixTimestamp(DateTime.MinValue);
-        public static double DateTimeMaxValue = DateTimeToUnixTimestamp(DateTime.Now);
+        //public static double DateTimeMinValue = DateTimeToUnixTimestamp(DateTime.MinValue);
+        //public static double DateTimeMaxValue = DateTimeToUnixTimestamp(DateTime.Now);
 
         public const string UniversalSearchItems = "UniversalSearchItems";
 

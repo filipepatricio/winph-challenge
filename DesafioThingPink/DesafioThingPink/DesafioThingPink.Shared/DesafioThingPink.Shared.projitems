@@ -16,6 +16,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)BingMaps\Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BingMaps\MapView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GoogleMapsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InstaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonUtil.cs" />

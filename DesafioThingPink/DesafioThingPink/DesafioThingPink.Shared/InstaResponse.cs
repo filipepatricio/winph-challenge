@@ -9,7 +9,7 @@ namespace DesafioThingPink
         public int code { get; set; }
     }
 
-    public class Location
+    public class InstaLocation
     {
         public double latitude { get; set; }
         public double longitude { get; set; }
@@ -95,7 +95,7 @@ namespace DesafioThingPink
     {
         public object attribution { get; set; }
         public List<object> tags { get; set; }
-        public Location location { get; set; }
+        public InstaLocation location { get; set; }
         public Comments comments { get; set; }
         public string filter { get; set; }
         public string created_time { get; set; }

@@ -32,9 +32,6 @@ namespace DesafioThingPink
         ApiRequests apiRequests;
         ObservableImageItems insta_image_collection;
 
-        double lat, lng;
-        double min_timestamp, max_timestamp;
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,8 +40,6 @@ namespace DesafioThingPink
 
             apiRequests = new ApiRequests();
 
-            min_timestamp = UniversalAppUtil.DateTimeMinValue;
-            max_timestamp = UniversalAppUtil.DateTimeMaxValue;
         }
 
         /// <summary>
@@ -62,7 +57,9 @@ namespace DesafioThingPink
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
 
-            RecentSearchList.ItemsSource = new ObservableSearchItems(UniversalAppUtil.GetSearchItemsFromRoamingSettings());
+            List<SearchItem> roaming_search_list = UniversalAppUtil.GetSearchItemsFromRoamingSettings();
+            RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
+            RefreshMap(roaming_search_list);
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -71,8 +68,9 @@ namespace DesafioThingPink
             //lng = 0;//-8.6064951; //Google maps Request
             //min_timestamp = 1395014400;
             //max_timestamp = 1395097200;
-            string insta_images_response = String.Empty;
 
+            double lat = 0;
+            double lng = 0;
             string location = LocationTextBox.Text;
 
             if (!location.Equals(String.Empty))
@@ -90,11 +88,8 @@ namespace DesafioThingPink
                     geopos.Latitude = lat;
                     geopos.Longitude = lng;
                     Geopoint geopoint = new Geopoint(geopos);
-                    MapControl.Center = geopoint;
-                    MapControl.ZoomLevel = 10;
-                    MapIcon pin = new MapIcon();
-                    pin.Location = geopoint;
-                    MapControl.MapElements.Add(pin);
+                    MyMap.Center = geopoint;
+                    MyMap.Zoom = 7;
                 }
                 else
                 {
@@ -104,16 +99,24 @@ namespace DesafioThingPink
 
             }
 
-
-            insta_images_response = await apiRequests.GetInstaImages(location, lat, lng, min_timestamp, max_timestamp);
-            
-            Debug.WriteLine(insta_images_response);
+            double max_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(UntilDate.Date.DateTime);
+            double min_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(SinceDate.Date.DateTime);
 
             if (max_timestamp - min_timestamp < 0)
             {
                 ShowMessage("Intervalo de tempo inválido");
                 return;
             }
+
+            await InstaSearch(lat, lng, location, max_timestamp, min_timestamp);
+        }
+
+        private async Task InstaSearch(double lat, double lng, string location, double max_timestamp, double min_timestamp)
+        {
+            string insta_images_response = String.Empty;
+            insta_images_response = await apiRequests.GetInstaImages(location, lat, lng, min_timestamp, max_timestamp);
+
+            Debug.WriteLine(insta_images_response);
 
             if (insta_images_response == null)
                 return;
@@ -131,9 +134,28 @@ namespace DesafioThingPink
                 }
 
                 ImageList.ItemsSource = insta_image_collection;
-                RecentSearchList.ItemsSource = new ObservableSearchItems(UniversalAppUtil.GetSearchItemsFromRoamingSettings());
+
+                List<SearchItem> roaming_search_list = UniversalAppUtil.GetSearchItemsFromRoamingSettings();
+                RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
+                RefreshMap(roaming_search_list);
 
             });
+        }
+
+        private void RefreshMap(List<SearchItem> roaming_search_list)
+        {
+            int i = 1;
+            foreach (SearchItem search_item in roaming_search_list)
+            {
+                BasicGeoposition geopos = new BasicGeoposition();
+                geopos.Latitude = search_item.lat;
+                geopos.Longitude = search_item.lng;
+                Geopoint geopoint = new Geopoint(geopos);
+                MyMap.Center = geopoint;
+                MyMap.Zoom = 7;
+                MyMap.AddPushpin(geopos, i.ToString());
+                i++;
+            }
         }
 
         public static async void ShowMessage(string message)
@@ -142,14 +164,15 @@ namespace DesafioThingPink
             await dialog.ShowAsync();
         }
 
-        private void SinceDate_DateChanged(object sender, DatePickerValueChangedEventArgs e)
-        {
-            min_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(SinceDate.Date.DateTime);
-        }
 
-        private void UntilDate_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        private async void RecentSearchList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            max_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(UntilDate.Date.DateTime);
+            SearchItemDesign clicked_item = (e.ClickedItem as SearchItemDesign);
+            SearchItem search_item = clicked_item.search_item;
+
+            await InstaSearch(search_item.lat, search_item.lng, search_item.location, search_item.max_timestamp, search_item.min_timestamp);
+
+            MainPivot.SelectedIndex = 1;
         }
 
     }

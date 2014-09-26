@@ -33,12 +33,8 @@ namespace DesafioThingPink
         {
             string url = String.Empty;
 
-            if (min_timestamp != UniversalAppUtil.DateTimeMinValue && max_timestamp != UniversalAppUtil.DateTimeMaxValue)
+            if (Math.Round(min_timestamp) < Math.Round(max_timestamp))
                 url = String.Format("{0}{1}?lat={2}&lng={3}&min_timestamp={4}&max_timestamp={5}&client_id={6}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), min_timestamp.ToString(), max_timestamp.ToString(), INSTA_CLIENT_ID);
-            else if (min_timestamp != UniversalAppUtil.DateTimeMinValue)
-                url = String.Format("{0}{1}?lat={2}&lng={3}&min_timestamp={4}&client_id={5}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), min_timestamp.ToString(), INSTA_CLIENT_ID);
-            else if (max_timestamp != UniversalAppUtil.DateTimeMaxValue)
-                url = String.Format("{0}{1}?lat={2}&lng={3}&max_timestamp={4}&client_id={5}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), max_timestamp.ToString(), INSTA_CLIENT_ID);
             else
                 url = String.Format("{0}{1}?lat={2}&lng={3}&client_id={4}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), INSTA_CLIENT_ID);
 
