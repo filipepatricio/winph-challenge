@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DesafioThingPink">
 	<Application.Resources>
-	</Application.Resources>
+        <x:String x:Key="BingMapsKey">YOUR_BING_MAPS_KEY</x:String>
+        <x:String x:Key="MapServiceToken">YOUR_WP_MAP_TOKEN</x:String>
+    </Application.Resources>
 
 </Application>

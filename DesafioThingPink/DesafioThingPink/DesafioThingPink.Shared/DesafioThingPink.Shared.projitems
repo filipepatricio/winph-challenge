@@ -20,6 +20,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)InstaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ImageItemDesign.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ObservableImageItems.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ObservableCollections.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SearchItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SearchItemDesign.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UniversalAppUtil.cs" />
   </ItemGroup>
 </Project>

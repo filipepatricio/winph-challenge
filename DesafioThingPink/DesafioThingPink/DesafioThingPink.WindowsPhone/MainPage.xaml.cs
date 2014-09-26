@@ -31,7 +31,6 @@ namespace DesafioThingPink
     {
         ApiRequests apiRequests;
         ObservableImageItems insta_image_collection;
-        ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
 
         double lat, lng;
         double min_timestamp, max_timestamp;
@@ -43,6 +42,9 @@ namespace DesafioThingPink
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             apiRequests = new ApiRequests();
+
+            min_timestamp = UniversalAppUtil.DateTimeMinValue;
+            max_timestamp = UniversalAppUtil.DateTimeMaxValue;
         }
 
         /// <summary>
@@ -59,6 +61,8 @@ namespace DesafioThingPink
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+
+            RecentSearchList.ItemsSource = new ObservableSearchItems(UniversalAppUtil.GetSearchItemsFromRoamingSettings());
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -68,14 +72,12 @@ namespace DesafioThingPink
             //min_timestamp = 1395014400;
             //max_timestamp = 1395097200;
             string insta_images_response = String.Empty;
-            
-            
-            
 
+            string location = LocationTextBox.Text;
 
-            if(!LocationTextBox.Equals(String.Empty))
+            if (!location.Equals(String.Empty))
             {
-                string google_coords_response = await apiRequests.GetGoogleCoords(LocationTextBox.Text);
+                string google_coords_response = await apiRequests.GetGoogleCoords(location);
                 GoogleRootObject google_root = JsonUtil.Deserialize<GoogleRootObject>(google_coords_response);
 
                 if(google_root.status.Equals("OK"))
@@ -102,17 +104,19 @@ namespace DesafioThingPink
 
             }
 
+
+            insta_images_response = await apiRequests.GetInstaImages(location, lat, lng, min_timestamp, max_timestamp);
+            
+            Debug.WriteLine(insta_images_response);
+
             if (max_timestamp - min_timestamp < 0)
             {
                 ShowMessage("Intervalo de tempo inválido");
                 return;
             }
-            else
-            {
-                insta_images_response = await apiRequests.GetInstaImages(lat, lng, min_timestamp, max_timestamp);
-            }
 
-            Debug.WriteLine(insta_images_response);
+            if (insta_images_response == null)
+                return;
 
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
             {
@@ -127,31 +131,25 @@ namespace DesafioThingPink
                 }
 
                 ImageList.ItemsSource = insta_image_collection;
-
+                RecentSearchList.ItemsSource = new ObservableSearchItems(UniversalAppUtil.GetSearchItemsFromRoamingSettings());
 
             });
         }
 
-        private async void ShowMessage(string message)
+        public static async void ShowMessage(string message)
         {
             var dialog = new MessageDialog(message);
             await dialog.ShowAsync();
         }
 
-        public static double DateTimeToUnixTimestamp(DateTime dateTime)
-        {
-            //http://stackoverflow.com/questions/249760/how-to-convert-unix-timestamp-to-datetime-and-vice-versa
-            return (dateTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
-        }
-
         private void SinceDate_DateChanged(object sender, DatePickerValueChangedEventArgs e)
         {
-            min_timestamp = DateTimeToUnixTimestamp(SinceDate.Date.DateTime);
+            min_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(SinceDate.Date.DateTime);
         }
 
         private void UntilDate_DateChanged(object sender, DatePickerValueChangedEventArgs e)
         {
-            max_timestamp = DateTimeToUnixTimestamp(UntilDate.Date.DateTime);
+            max_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(UntilDate.Date.DateTime);
         }
 
     }
