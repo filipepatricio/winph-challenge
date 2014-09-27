@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DesafioThingPink
+namespace DesafioThingPink.Models
 {
     public class AddressComponent
     {

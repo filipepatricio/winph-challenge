@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DesafioThingPink
+namespace DesafioThingPink.Models
 {
     public class Meta
     {
@@ -20,7 +20,7 @@ namespace DesafioThingPink
     public class Comments
     {
         public int count { get; set; }
-        public List<object> data { get; set; }
+        public List<Caption> data { get; set; }
     }
 
     public class Datum2
@@ -91,7 +91,7 @@ namespace DesafioThingPink
         public string id { get; set; }
     }
 
-    public class Datum
+    public class ImageData
     {
         public object attribution { get; set; }
         public List<object> tags { get; set; }
@@ -112,6 +112,6 @@ namespace DesafioThingPink
     public class InstaRootObject
     {
         public Meta meta { get; set; }
-        public List<Datum> data { get; set; }
+        public List<ImageData> data { get; set; }
     }
 }

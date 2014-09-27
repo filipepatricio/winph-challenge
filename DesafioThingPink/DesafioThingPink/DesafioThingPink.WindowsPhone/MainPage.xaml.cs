@@ -19,6 +19,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using DesafioThingPink.ViewModels;
+using DesafioThingPink.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -47,7 +49,7 @@ namespace DesafioThingPink
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: Prepare page for display here.
 
@@ -57,7 +59,7 @@ namespace DesafioThingPink
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
 
-            List<SearchItem> roaming_search_list = UniversalAppUtil.GetSearchItemsFromRoamingSettings();
+            List<SearchItem> roaming_search_list = await UniversalAppUtil.GetSearchItemsFromRoamingSettings();
             RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
             RefreshMap(roaming_search_list);
         }
@@ -96,8 +98,15 @@ namespace DesafioThingPink
                     ShowMessage("Localizacao nao encontrada");
                     return;
                 }
-
             }
+
+            else
+            {
+                ShowMessage("Introduza uma localizacao");
+                return;
+            }
+
+            
 
             double max_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(UntilDate.Date.DateTime);
             double min_timestamp = UniversalAppUtil.DateTimeToUnixTimestamp(SinceDate.Date.DateTime);
@@ -109,6 +118,9 @@ namespace DesafioThingPink
             }
 
             await InstaSearch(lat, lng, location, max_timestamp, min_timestamp);
+
+           
+
         }
 
         private async Task InstaSearch(double lat, double lng, string location, double max_timestamp, double min_timestamp)
@@ -135,7 +147,7 @@ namespace DesafioThingPink
 
                 ImageList.ItemsSource = insta_image_collection;
 
-                List<SearchItem> roaming_search_list = UniversalAppUtil.GetSearchItemsFromRoamingSettings();
+                List<SearchItem> roaming_search_list = await UniversalAppUtil.GetSearchItemsFromRoamingSettings();
                 RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
                 RefreshMap(roaming_search_list);
 
@@ -173,6 +185,17 @@ namespace DesafioThingPink
             await InstaSearch(search_item.lat, search_item.lng, search_item.location, search_item.max_timestamp, search_item.min_timestamp);
 
             MainPivot.SelectedIndex = 1;
+        }
+
+        private void ImageList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //GO TO IMAGE DETAIL
+            ImageItemDesign clicked_image = (e.ClickedItem as ImageItemDesign);
+            ImageData image_data = clicked_image.image_data;
+            StorageUtil.SaveData("ImageSelected.dat", image_data);
+
+            this.Frame.Navigate(typeof(ImageDetail), image_data);
+
         }
 
     }

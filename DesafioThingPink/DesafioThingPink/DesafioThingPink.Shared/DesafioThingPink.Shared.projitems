@@ -18,13 +18,15 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps\MapView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GoogleMapsResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)InstaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonUtil.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ImageItemDesign.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ObservableCollections.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SearchItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SearchItemDesign.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GoogleMapsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\InstaResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SearchItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UniversalAppUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CommentDesign.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImageItemDesign.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ObservableCollections.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchItemDesign.cs" />
   </ItemGroup>
 </Project>

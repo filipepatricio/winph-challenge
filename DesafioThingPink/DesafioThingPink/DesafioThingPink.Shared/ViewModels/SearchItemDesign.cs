@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using DesafioThingPink.Models;
 
-namespace DesafioThingPink
+namespace DesafioThingPink.ViewModels
 {
     class SearchItemDesign : INotifyPropertyChanged
     {

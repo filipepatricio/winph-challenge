@@ -7,15 +7,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Page.Resources>
+		<DataTemplate x:Key="CommentsTemplate">
+			<Grid Margin="0,10,0,0">
+				<StackPanel>
+					<TextBlock x:Name="User" Text="{Binding user}" TextWrapping="Wrap" FontSize="11" FontFamily="Segoe WP Black"/>
+					<TextBlock x:Name="CommentText" TextWrapping="Wrap" Text="{Binding text}" FontSize="14" FontFamily="Segoe UI Semilight"/>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
+	</Page.Resources>
 
     <Grid>
-    	<ListView>
+    	<ListView x:Name="CommentList" ItemTemplate="{StaticResource CommentsTemplate}">
     		<ListView.Header>
     			<StackPanel>
-    				<Image x:Name="Image" Height="346" Width="400"/>
+    				<Image x:Name="Image" Height="400" Width="400"/>
     				<Grid>
-    					<TextBlock x:Name="LikesText" TextWrapping="Wrap" Text="Likes" HorizontalAlignment="Right"/>
-    					<TextBlock x:Name="UsernameText" TextWrapping="Wrap" Text="Username" HorizontalAlignment="Left"/>
+    					<TextBlock x:Name="LikesText" TextWrapping="Wrap" Text="Likes" HorizontalAlignment="Right" FontSize="22" FontFamily="Segoe WP Light"/>
+    					<TextBlock x:Name="UsernameText" TextWrapping="Wrap" Text="Username" HorizontalAlignment="Left" Foreground="White" FontSize="22" FontFamily="Segoe WP Light"/>
     				</Grid>
     			</StackPanel>
     		</ListView.Header>
