@@ -18,7 +18,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps\MapView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Manager\FacebookManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GoogleMapsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\InstaResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SearchItem.cs" />

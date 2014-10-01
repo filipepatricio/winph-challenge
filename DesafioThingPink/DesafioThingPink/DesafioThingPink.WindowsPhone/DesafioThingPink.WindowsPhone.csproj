@@ -80,12 +80,19 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="App.WindowsPhone.cs" />
+    <Compile Include="BasicPageFB.xaml.cs">
+      <DependentUpon>BasicPageFB.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageDetail.xaml.cs">
       <DependentUpon>ImageDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\ContinuationManager.cs" />
+    <Compile Include="Manager\FacebookManager.WindowsPhone.cs" />
+    <Compile Include="Misc\IWebAuthenticationBrokerContinuable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +109,10 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BasicPageFB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ImageDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +121,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Facebook">
+      <HintPath>..\..\packages\Facebook.6.8.0\lib\portable-win81+wpa81\Facebook.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

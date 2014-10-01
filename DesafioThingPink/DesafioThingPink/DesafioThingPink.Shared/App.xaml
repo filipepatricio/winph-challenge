@@ -6,6 +6,8 @@
 	<Application.Resources>
         <x:String x:Key="BingMapsKey">YOUR_BING_MAPS_KEY</x:String>
         <x:String x:Key="MapServiceToken">YOUR_WP_MAP_TOKEN</x:String>
+        <x:String x:Key="FacebookAppId">1533966356840788</x:String>
+        <x:String x:Key="FacebookPermissions">publish_actions</x:String>
     </Application.Resources>
 
 </Application>

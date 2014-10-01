@@ -106,6 +106,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\FacebookManager.WindowsStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +114,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="DesafioThingPink.Windows_TemporaryKey.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
@@ -133,6 +135,11 @@
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Facebook">
+      <HintPath>..\..\packages\Facebook.6.8.0\lib\win8\Facebook.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

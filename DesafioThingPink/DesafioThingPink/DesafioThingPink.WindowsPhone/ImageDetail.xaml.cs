@@ -20,6 +20,9 @@ using Windows.Storage.Streams;
 using Windows.Graphics.Imaging;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DesafioThingPink.Manager;
+using DesafioThingPink.Misc;
+using Windows.ApplicationModel.Activation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -28,11 +31,10 @@ namespace DesafioThingPink
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ImageDetail : Page
+    public sealed partial class ImageDetail : Page, IWebAuthenticationBrokerContinuable
     {
         ImageData image_data;
         BitmapImage bitmap_image = new BitmapImage();
-
 
         public ImageDetail()
         {
@@ -104,7 +106,54 @@ namespace DesafioThingPink
 
         private async void ShareOnFacebook_Click(object sender, RoutedEventArgs e)
         {
+            if (UniversalAppUtil._fbm == null)
+            {
+                UniversalAppUtil._fbm = new FacebookManager();
+                UniversalAppUtil._fbm.LoginAndContinue();
+            }
 
+            PublishStory();
+            
+        }
+
+        private async void PublishStory()
+        {
+            //await this.loginButton.RequestNewPermissions("publish_stream");
+
+            var facebookClient = UniversalAppUtil._fbm._fb;
+
+            
+
+            var postParams = new
+            {
+                //name = "Facebook SDK for .NET",
+                //caption = "Build great social apps and get more installs.",
+                //description = "The Facebook SDK for .NET makes it easier and faster to develop Facebook integrated .NET apps.",
+                //link = "http://facebooksdk.net/",
+                picture = image_data.images.standard_resolution.url
+            };
+
+            try
+            {
+                dynamic fbPostTaskResult = await facebookClient.PostTaskAsync("/me/feed", postParams);
+                var result = (IDictionary<string, object>)fbPostTaskResult;
+
+                var successMessageDialog = new Windows.UI.Popups.MessageDialog("Posted Open Graph Action, id: " + (string)result["id"]);
+                await successMessageDialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                var exceptionMessageDialog = new Windows.UI.Popups.MessageDialog("Exception during post: " + ex.Message);
+                exceptionMessageDialog.ShowAsync();
+            }
+        }
+
+        public void ContinueWithWebAuthenticationBroker(WebAuthenticationBrokerContinuationEventArgs args)
+        {
+            UniversalAppUtil._fbm.ContinueAuthentication(args);
+            //txtFbToken.Text = _fbm.AccessToken;
+
+            PublishStory();
         }
     }
 }

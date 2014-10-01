@@ -1,4 +1,5 @@
-﻿using DesafioThingPink.Models;
+﻿using DesafioThingPink.Manager;
+using DesafioThingPink.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,8 @@ namespace DesafioThingPink
     {
         //public static double DateTimeMinValue = DateTimeToUnixTimestamp(DateTime.MinValue);
         //public static double DateTimeMaxValue = DateTimeToUnixTimestamp(DateTime.Now);
+
+        public static FacebookManager _fbm;
 
         public const string UniversalSearchItems = "UniversalSearchItems";
 
