@@ -1,5 +1,4 @@
-﻿using DesafioThingPink.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -8,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace DesafioThingPink
+namespace ClassLibrary
 {
-    class ApiRequests
+    public class ApiRequests
     {
         //INSTA EXAMPLE: https://api.instagram.com/v1/media/search?lat=41.1462127&lng=-8.6064951&min_timestamp=1395014400&max_timestamp=1395097200&client_id=a2d145d8c2e248b786ac778920e0437e
         //GOOGLE MAPS EXAMPLE: http://maps.google.com/maps/api/geocode/json?address=Porto,%20Portugal&sensor=false
@@ -30,6 +29,19 @@ namespace DesafioThingPink
             return responseContent;
         }
 
+        public async Task<string> GetInstaImages(string location, double lat, double lng)
+        {
+            string url = String.Empty;
+
+            url = String.Format("{0}{1}?lat={2}&lng={3}&client_id={4}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), INSTA_CLIENT_ID);
+
+            //TODO: SAVE Search on Roaming settings
+            //UniversalAppUtil.AddSearchItemToRoamingSettings(new SearchItem(location, lat, lng, min_timestamp, max_timestamp));
+
+
+            return await DoRequest(url);
+        }
+
         public async Task<string> GetInstaImages(string location, double lat, double lng, double min_timestamp, double max_timestamp)
         {
             string url = String.Empty;
@@ -40,7 +52,7 @@ namespace DesafioThingPink
                 url = String.Format("{0}{1}?lat={2}&lng={3}&client_id={4}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), INSTA_CLIENT_ID);
 
             //TODO: SAVE Search on Roaming settings
-            UniversalAppUtil.AddSearchItemToRoamingSettings(new SearchItem(location, lat, lng, min_timestamp, max_timestamp));
+            //UniversalAppUtil.AddSearchItemToRoamingSettings(new SearchItem(location, lat, lng, min_timestamp, max_timestamp));
 
 
             return await DoRequest(url);

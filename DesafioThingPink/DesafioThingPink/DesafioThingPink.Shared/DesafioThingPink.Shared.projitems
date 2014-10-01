@@ -12,7 +12,6 @@
     <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="$(MSBuildThisFileDirectory)ApiRequests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -20,11 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps\MapView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)JsonUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Manager\FacebookManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\GoogleMapsResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\InstaResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\SearchItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UniversalAppUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CommentDesign.cs" />

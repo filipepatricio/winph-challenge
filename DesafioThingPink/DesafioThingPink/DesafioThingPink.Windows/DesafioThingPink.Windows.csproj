@@ -141,6 +141,16 @@
       <HintPath>..\..\packages\Facebook.6.8.0\lib\win8\Facebook.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ClassLibrary\ClassLibrary.csproj">
+      <Project>{dc746a39-3c82-43cb-bc06-6cf482b513a1}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WindowsRunTimeComponent\BackgroundTasks.csproj">
+      <Project>{cfd0998f-4bb3-4896-bd90-c122086a94e1}</Project>
+      <Name>BackgroundTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

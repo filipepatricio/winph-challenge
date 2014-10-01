@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioThingPink.WindowsPho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IscteDemo", "..\..\IscteDemo\IscteDemo\IscteDemo.csproj", "{ED6E8857-C520-4342-8BE7-3799285DD444}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTasks", "WindowsRunTimeComponent\BackgroundTasks.csproj", "{CFD0998F-4BB3-4896-BD90-C122086A94E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{DC746A39-3C82-43CB-BC06-6CF482B513A1}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DesafioThingPink\DesafioThingPink.Shared\DesafioThingPink.Shared.projitems*{a4f7c092-d7be-4ab4-9384-cc19370e1676}*SharedItemsImports = 13
@@ -94,6 +98,26 @@ Global
 		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|x86.ActiveCfg = Release|x86
 		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|x86.Build.0 = Release|x86
 		{ED6E8857-C520-4342-8BE7-3799285DD444}.Release|x86.Deploy.0 = Release|x86
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Release|x64.ActiveCfg = Release|Any CPU
+		{CFD0998F-4BB3-4896-BD90-C122086A94E1}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC746A39-3C82-43CB-BC06-6CF482B513A1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

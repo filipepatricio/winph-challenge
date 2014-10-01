@@ -6,9 +6,9 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesafioThingPink
+namespace ClassLibrary
 {
-    class JsonUtil
+    public class JsonUtil
     {
         public static string Serialize<T>(T obj)
         {

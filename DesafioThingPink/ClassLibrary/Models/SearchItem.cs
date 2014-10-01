@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DesafioThingPink.Models
 {
-    class SearchItem
+    public class SearchItem
     {
         public string location {get; set;}
         public double lat { get; set; }

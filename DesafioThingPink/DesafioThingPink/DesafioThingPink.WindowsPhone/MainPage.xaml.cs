@@ -21,6 +21,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using DesafioThingPink.ViewModels;
 using DesafioThingPink.Models;
+using ClassLibrary;
+using Windows.ApplicationModel.Background;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -58,6 +60,8 @@ namespace DesafioThingPink
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+
+            this.RegisterBackgroundTask();
 
             List<SearchItem> roaming_search_list = await UniversalAppUtil.GetSearchItemsFromRoamingSettings();
             RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
@@ -127,6 +131,8 @@ namespace DesafioThingPink
         {
             string insta_images_response = String.Empty;
             insta_images_response = await apiRequests.GetInstaImages(location, lat, lng, min_timestamp, max_timestamp);
+
+            UniversalAppUtil.AddSearchItemToRoamingSettings(new SearchItem(location, lat, lng, min_timestamp, max_timestamp));
 
             Debug.WriteLine(insta_images_response);
 
@@ -198,5 +204,31 @@ namespace DesafioThingPink
 
         }
 
+        private async void RegisterBackgroundTask()
+        {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if( backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity )
+            {
+                foreach( var task in BackgroundTaskRegistration.AllTasks )
+                {
+                    if( task.Value.Name == taskName )
+                    {
+                        task.Value.Unregister( true );
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger( new TimeTrigger( 15, false ) );
+                var registration = taskBuilder.Register();
+            }
+        }
+
+        private const string taskName = "BackgroundTask";
+        private const string taskEntryPoint = "BackgroundTasks.BackgroundTask";
     }
+
+    
 }
