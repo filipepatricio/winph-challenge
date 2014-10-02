@@ -17,6 +17,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps\Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps\MapView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Manager\FacebookManager.cs" />
@@ -26,5 +29,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImageItemDesign.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ObservableCollections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchItemDesign.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Common\ReadMe.txt" />
   </ItemGroup>
 </Project>

@@ -112,6 +112,9 @@ namespace DesafioThingPink
                 UniversalAppUtil._fbm.LoginAndContinue();
             }
 
+            if (UniversalAppUtil._fbm._fb.AccessToken == null)
+                UniversalAppUtil._fbm.LoginAndContinue();
+
             PublishStory();
             
         }

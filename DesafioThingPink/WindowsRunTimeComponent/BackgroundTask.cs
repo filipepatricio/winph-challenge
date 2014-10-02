@@ -130,7 +130,7 @@ namespace BackgroundTasks
         {
             var settings = ApplicationData.Current.LocalSettings;
             string insta_images_response = String.Empty;
-            string location = "CurrentLocation";
+            string location = "DeviceLocation";
             double lat = (double) settings.Values["Latitude"];
             double lng = (double) settings.Values["Longitude"];
             insta_images_response = await apiRequests.GetInstaImages(location, lat, lng);
@@ -152,7 +152,7 @@ namespace BackgroundTasks
             updater.Clear();
 
             // Keep track of the number feed items that get tile notifications. 
-            int itemCount = 0;
+            //int itemCount = 0;
 
             var item = feed.data[0];
             // Create a tile notification for each feed item.

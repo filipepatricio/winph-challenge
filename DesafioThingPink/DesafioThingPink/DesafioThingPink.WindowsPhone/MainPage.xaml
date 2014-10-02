@@ -21,19 +21,7 @@
 		<x:Double x:Key="ListViewItemDisabledThemeOpacity">0.55</x:Double>
 		<x:Double x:Key="ListViewItemContentTranslateX">40.5</x:Double>
 		<x:Double x:Key="ListViewItemReorderHintThemeOffset">32</x:Double>
-		<DataTemplate x:Key="DataTemplate1">
-			<Grid>
-				<StackPanel>
-                    <Image Height="200" Source="{Binding image}"/>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding autor}" FontSize="26.667" FontFamily="Segoe UI Semilight"/>
-				</StackPanel>
-			</Grid>
-		</DataTemplate>
-		<DataTemplate x:Key="DataTemplate2">
-			<Grid>
-				<TextBlock Text="{Binding search_text}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Semilight" FontSize="16"/>
-			</Grid>
-		</DataTemplate>
+
 		<Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
 			<Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
 			<Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
@@ -237,15 +225,16 @@
 	</Page.Resources>
 
 	<Grid>
-		<Pivot x:Name="MainPivot" Title="InstaLocation">
+	
+		<Pivot x:Name="MainPivot" Title="InstaLocation" d:IsHidden="True">
 			<PivotItem x:Name="RecentSearchPivot" Header="Recentes">
 				<Grid>
-					<ListView x:Name="RecentSearchList" ItemTemplate="{StaticResource DataTemplate2}" IsItemClickEnabled="True" ItemClick="RecentSearchList_ItemClick"/>
+					<ListView x:Name="RecentSearchList" ItemTemplate="{StaticResource SearchItemsTemplate}" IsItemClickEnabled="True" ItemClick="RecentSearchList_ItemClick"/>
 				</Grid>
 			</PivotItem>
 			<PivotItem x:Name="SearchPivot" Header="Pesquisar">
                 <Grid>
-                    <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding}" ItemTemplate="{StaticResource DataTemplate1}" ItemClick="ImageList_ItemClick" ItemContainerStyle="{StaticResource ListViewItemStyle1}"  >
+                    <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding}" ItemTemplate="{StaticResource ImageItemsTemplate}" ItemClick="ImageList_ItemClick" ItemContainerStyle="{StaticResource ListViewItemStyle1}"  >
 						<ListView.Header>
                             <Grid VerticalAlignment="Top" Height="161">
                                 <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local"/>
@@ -260,10 +249,44 @@
 				</Grid>
 			</PivotItem>
 			<PivotItem x:Name="MapPivot" Header="Mapa">
-				<!--<Maps:MapControl x:Name="MapControl"/>-->
                 <local:MapView x:Name="MyMap"/>
             </PivotItem>
 		</Pivot>
+		
+		<!--<Hub x:Name="MainHub" Header="Hub">
+			<HubSection x:Name="RecentSearchSection" Header="Recentes">
+				<DataTemplate>
+					<Grid>
+						<ListView x:Name="RecentSearchList" ItemTemplate="{StaticResource SearchItemsTemplate}" IsItemClickEnabled="True" ItemClick="RecentSearchList_ItemClick"/>
+					</Grid>
+				</DataTemplate>
+			</HubSection>
+			<HubSection x:Name="SearchSection" Header="Pesquisa">
+				<DataTemplate>
+					                <Grid>
+                    <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding}" ItemTemplate="{StaticResource ImageItemsTemplate}" ItemClick="ImageList_ItemClick" ItemContainerStyle="{StaticResource ListViewItemStyle1}"  >
+						<ListView.Header>
+                            <Grid VerticalAlignment="Top" Height="161">
+                                <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local"/>
+                                <DatePicker x:Name="SinceDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,48,0,0"/>
+                                <DatePicker x:Name="UntilDate" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,48,0,0"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" Text="De" VerticalAlignment="Top" FontFamily="Global User Interface"/>
+                                <TextBlock HorizontalAlignment="Right" Margin="0,62,120,0" TextWrapping="Wrap" Text="Até" VerticalAlignment="Top" FontFamily="Global User Interface"/>
+                                <Button x:Name="SearchButton" Content="Pesquisar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
+                            </Grid>
+                        </ListView.Header>
+					</ListView>
+				</Grid>
+				</DataTemplate>
+			</HubSection>
+			<HubSection x:Name="MapSection" Header="Mapa">
+				<DataTemplate>
+					<Grid>
+						<local:MapView x:Name="MyMap"/>
+					</Grid>
+				</DataTemplate>
+			</HubSection>
+		</Hub>-->
 
 	</Grid>
 </Page>

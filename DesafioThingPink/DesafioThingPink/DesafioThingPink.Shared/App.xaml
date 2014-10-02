@@ -7,7 +7,23 @@
         <x:String x:Key="BingMapsKey">YOUR_BING_MAPS_KEY</x:String>
         <x:String x:Key="MapServiceToken">YOUR_WP_MAP_TOKEN</x:String>
         <x:String x:Key="FacebookAppId">1533966356840788</x:String>
+        <x:String x:Key="FacebookAppSecret">a4df5f6b19347ec2916e36f27542f5f7</x:String>
         <x:String x:Key="FacebookPermissions">publish_actions</x:String>
+
+        <DataTemplate x:Key="ImageItemsTemplate">
+            <Grid>
+                <StackPanel>
+                    <Image Height="200" Source="{Binding image}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding autor}" FontSize="26.667" FontFamily="Segoe UI Semilight"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="SearchItemsTemplate">
+            <Grid>
+                <TextBlock Text="{Binding search_text}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Semilight" FontSize="16"/>
+            </Grid>
+        </DataTemplate>
+
     </Application.Resources>
 
 </Application>

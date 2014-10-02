@@ -32,7 +32,7 @@ namespace DesafioThingPink.Manager
                         response_type = "token"
                     });
             _fb.AppId = (string) App.Current.Resources["FacebookAppId"];
-            _fb.AppSecret = "a4df5f6b19347ec2916e36f27542f5f7";
+            _fb.AppSecret = (string)App.Current.Resources["FacebookAppSecret"];
         }
 
         private void ValidateAndProccessResult(WebAuthenticationResult result)
