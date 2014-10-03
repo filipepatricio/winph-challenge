@@ -46,27 +46,25 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
                 </Grid>
             </Hub.Header>
-
-            <HubSection Width="780" Margin="0,0,80,0">
+            <HubSection Header="Section 1">
+                <DataTemplate>
+                    <ListView x:Name="RecentSearchList" ItemTemplate="{StaticResource SearchItemsTemplate}" IsItemClickEnabled="True" ItemClick="RecentSearchList_ItemClick" Loaded="RecentSearchList_Loaded" />
+                </DataTemplate>
+            </HubSection>
+            <!--<HubSection Width="780" Margin="0,0,80,0">
                 <HubSection.Background>
                     <ImageBrush Stretch="UniformToFill" />
                 </HubSection.Background>
-            </HubSection>
-            <HubSection Width="500" Header="Section 1">
+            </HubSection>-->
+            <HubSection Width="500" Header="Section 2" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <DataTemplate>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-						    <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding ImageList}" ItemTemplate="{StaticResource ImageItemsTemplate}" ItemClick="ImageList_ItemClick"  >
+                        <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding ImageList}" ItemTemplate="{StaticResource ImageItemsTemplate}" ItemClick="ImageList_ItemClick" Loaded="ImageList_Loaded"  >
                             <ListView.Header>
                                 <Grid Height="185">
-                                    <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local"/>
-                                    <DatePicker x:Name="SinceDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,48,0,0"/>
-                                    <DatePicker x:Name="UntilDate" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Global User Interface" Margin="42,100,0,0"/>
+                                    <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local" Loaded="LocationTextBox_Loaded"/>
+                                    <DatePicker x:Name="SinceDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,48,0,0" Loaded="SinceDate_Loaded"/>
+                                    <DatePicker x:Name="UntilDate" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Global User Interface" Margin="42,100,0,0" Loaded="UntilDate_Loaded"/>
                                     <TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" Text="De" VerticalAlignment="Top"/>
                                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Até" VerticalAlignment="Top" FontFamily="Global User Interface" Margin="0,110,0,0"/>
                                     <Button x:Name="SearchButton" Content="Pesquisar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
@@ -76,57 +74,12 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection Width="520" Header="Section 2">
+            <HubSection Width="520" Header="Section 3">
                 <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,10"
-                                   Text="Item Title" />
-                        <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Grid.Row="1" 
-                                   Text="Quisque in porta lorem dolor amet sed consectetuer ising elit, sed diam non my nibh uis mod wisi quip."/>
-                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Grid.Row="2" Margin="0,20,0,0"
-                                   Text="Item Sub Title"/>
-                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" 
-                                   Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
-                    </Grid>
+                    <local:MapView x:Name="MyMap" Loaded="MyMap_Loaded" />
                 </DataTemplate>
             </HubSection>
-
-            <HubSection Header="Section 3">
-                <DataTemplate>
-                    <!-- width of 400 -->
-                    <StackPanel Orientation="Vertical">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="130"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="130"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="130"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="270"/>
-                                <RowDefinition Height="95"/>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Image Grid.ColumnSpan="5" Stretch="Fill" Margin="0,0,0,10"/>
-                            <Image Grid.Row="1" Stretch="Fill"/>
-                            <Image Grid.Row="1" Grid.Column="2" Stretch="Fill"/>
-                            <Image Grid.Row="1" Grid.Column="4" Stretch="Fill"/>
-                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Grid.Row="2" Grid.ColumnSpan="5" Margin="0,15,0,0"
-                                       Text="Description Text:"/>
-                            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Grid.Row="3" Grid.ColumnSpan="5" 
-                                       Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
-                        </Grid>
-                    </StackPanel>
-                </DataTemplate>
-            </HubSection>
+            
         </Hub>
     </Grid>
 </Page>

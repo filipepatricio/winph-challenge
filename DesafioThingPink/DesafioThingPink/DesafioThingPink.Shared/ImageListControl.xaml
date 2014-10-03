@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="DesafioThingPink.ImageListControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DesafioThingPink"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="400">
+
+    <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ImageList_ItemClick" ItemTemplate="{StaticResource ImageItemsTemplate}" >
+		<ListView.Header>
+    		<StackPanel>
+    			<TextBox x:Name="LocationTextBox" TextWrapping="Wrap" PlaceholderText="Local"/>
+    			<Grid Margin="0,10">
+    				<Grid.RowDefinitions>
+    					<RowDefinition Height="Auto" />
+    					<RowDefinition Height="Auto"/>
+    				</Grid.RowDefinitions>
+    				<Grid.ColumnDefinitions>
+    					<ColumnDefinition Width="Auto" />
+    					<ColumnDefinition Width="*" />
+    				</Grid.ColumnDefinitions>
+    				<TextBlock TextWrapping="Wrap" Text="De" Grid.Row="0" VerticalAlignment="Center"/>
+    				<DatePicker x:Name="SinceDate" Grid.Row="0" Grid.Column="1"/>
+    				<TextBlock TextWrapping="Wrap" Text="Até" Grid.Row="1" VerticalAlignment="Center"/>
+    				<DatePicker x:Name="UntilDate" Grid.Row="1" Grid.Column="1"/>
+    			</Grid>
+    			<Button x:Name="SearchButton" Content="Pesquisar" Click="SearchButton_Click" HorizontalAlignment="Stretch" />
+    		</StackPanel>
+    	</ListView.Header>
+	</ListView>
+</UserControl>

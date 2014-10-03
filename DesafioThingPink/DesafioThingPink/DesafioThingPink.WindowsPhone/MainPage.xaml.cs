@@ -198,7 +198,6 @@ namespace DesafioThingPink
             //GO TO IMAGE DETAIL
             ImageItemDesign clicked_image = (e.ClickedItem as ImageItemDesign);
             ImageData image_data = clicked_image.image_data;
-            StorageUtil.SaveData("ImageSelected.dat", image_data);
 
             this.Frame.Navigate(typeof(ImageDetail), image_data);
 
