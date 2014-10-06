@@ -33,19 +33,12 @@ namespace DesafioThingPink
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        TextBox LocationTextBox;
-        DatePicker SinceDate;
-        DatePicker UntilDate;
-
-        ApiRequests apiRequests = new ApiRequests();
-        ObservableImageItems insta_image_collection;
+        private TextBox LocationTextBox;
+        private DatePicker SinceDate;
+        private DatePicker UntilDate;
         private ListView ImageList;
         private ListView RecentSearchList;
         private MapView MyMap;
-
-        private const string taskName = "BackgroundTask";
-        private const string taskEntryPoint = "BackgroundTasks.BackgroundTask";
-        List<SearchItem> roaming_search_list;
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -169,19 +162,18 @@ namespace DesafioThingPink
                     geopos.Latitude = lat;
                     geopos.Longitude = lng;
                     Geopoint geopoint = new Geopoint(geopos);
-                    //MyMap.Center = geopoint;
-                    //MyMap.Zoom = 7;
+                    MyMap.Center = geopoint;
+                    MyMap.Zoom = 7;
                 }
                 else
                 {
-                    ShowMessage("Localizacao nao encontrada");
+                    UniversalAppUtil.ShowMessage("Localizacao nao encontrada");
                     return;
                 }
             }
-
             else
             {
-                ShowMessage("Introduza uma localizacao");
+                UniversalAppUtil.ShowMessage("Introduza uma localizacao");
                 return;
             }
 
@@ -192,17 +184,11 @@ namespace DesafioThingPink
 
             if (max_timestamp - min_timestamp < 0)
             {
-                ShowMessage("Intervalo de tempo inválido");
+                UniversalAppUtil.ShowMessage("Intervalo de tempo inválido");
                 return;
             }
 
             await InstaSearch(lat, lng, location, max_timestamp, min_timestamp);
-        }
-
-        public static async void ShowMessage(string message)
-        {
-            var dialog = new MessageDialog(message);
-            await dialog.ShowAsync();
         }
 
         private async Task InstaSearch(double lat, double lng, string location, double max_timestamp, double min_timestamp)
@@ -226,7 +212,7 @@ namespace DesafioThingPink
 
                 if (insta_root.data.Count == 0)
                 {
-                    ShowMessage("Resultados não encontrados");
+                    UniversalAppUtil.ShowMessage("Resultados não encontrados");
                 }
 
                 ImageList.ItemsSource = insta_image_collection;
@@ -271,28 +257,6 @@ namespace DesafioThingPink
             await InstaSearch(search_item.lat, search_item.lng, search_item.location, search_item.max_timestamp, search_item.min_timestamp);
 
             //MainPivot.SelectedIndex = 1;
-        }
-
-        private async void RegisterBackgroundTask()
-        {
-            //var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
-            //if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
-            //    backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
-            //{
-            //    foreach (var task in BackgroundTaskRegistration.AllTasks)
-            //    {
-            //        if (task.Value.Name == taskName)
-            //        {
-            //            task.Value.Unregister(true);
-            //        }
-            //    }
-
-            //    BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
-            //    taskBuilder.Name = taskName;
-            //    taskBuilder.TaskEntryPoint = taskEntryPoint;
-            //    taskBuilder.SetTrigger(new TimeTrigger(15, false));
-            //    var registration = taskBuilder.Register();
-            //}
         }
 
 

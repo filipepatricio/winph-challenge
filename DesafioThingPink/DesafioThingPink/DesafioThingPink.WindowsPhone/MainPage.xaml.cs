@@ -33,16 +33,12 @@ namespace DesafioThingPink
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        ApiRequests apiRequests;
-        ObservableImageItems insta_image_collection;
 
         public MainPage()
         {
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
-
-            apiRequests = new ApiRequests();
 
         }
 
@@ -61,7 +57,7 @@ namespace DesafioThingPink
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
 
-            this.RegisterBackgroundTask();
+            //this.RegisterBackgroundTask();
 
             List<SearchItem> roaming_search_list = await UniversalAppUtil.GetSearchItemsFromRoamingSettings();
             RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
@@ -99,14 +95,14 @@ namespace DesafioThingPink
                 }
                 else
                 {
-                    ShowMessage("Localizacao nao encontrada");
+                    UniversalAppUtil.ShowMessage("Localizacao nao encontrada");
                     return;
                 }
             }
 
             else
             {
-                ShowMessage("Introduza uma localizacao");
+                UniversalAppUtil.ShowMessage("Introduza uma localizacao");
                 return;
             }
 
@@ -117,7 +113,7 @@ namespace DesafioThingPink
 
             if (max_timestamp - min_timestamp < 0)
             {
-                ShowMessage("Intervalo de tempo inválido");
+                UniversalAppUtil.ShowMessage("Intervalo de tempo inválido");
                 return;
             }
 
@@ -148,7 +144,7 @@ namespace DesafioThingPink
 
                 if (insta_root.data.Count == 0)
                 {
-                    ShowMessage("Resultados não encontrados");
+                    UniversalAppUtil.ShowMessage("Resultados não encontrados");
                 }
 
                 ImageList.ItemsSource = insta_image_collection;
@@ -176,12 +172,6 @@ namespace DesafioThingPink
             }
         }
 
-        public static async void ShowMessage(string message)
-        {
-            var dialog = new MessageDialog(message);
-            await dialog.ShowAsync();
-        }
-
 
         private async void RecentSearchList_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -203,30 +193,6 @@ namespace DesafioThingPink
 
         }
 
-        private async void RegisterBackgroundTask()
-        {
-            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
-            if( backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
-                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity )
-            {
-                foreach( var task in BackgroundTaskRegistration.AllTasks )
-                {
-                    if( task.Value.Name == taskName )
-                    {
-                        task.Value.Unregister( true );
-                    }
-                }
-
-                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
-                taskBuilder.Name = taskName;
-                taskBuilder.TaskEntryPoint = taskEntryPoint;
-                taskBuilder.SetTrigger( new TimeTrigger( 15, false ) );
-                var registration = taskBuilder.Register();
-            }
-        }
-
-        private const string taskName = "BackgroundTask";
-        private const string taskEntryPoint = "BackgroundTasks.BackgroundTask";
     }
 
     

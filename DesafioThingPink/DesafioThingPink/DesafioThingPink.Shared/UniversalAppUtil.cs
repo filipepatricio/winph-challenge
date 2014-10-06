@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI.Popups;
 
 namespace DesafioThingPink
 {
@@ -34,7 +35,7 @@ namespace DesafioThingPink
             return dtDateTime;
         }
 
-        public async static void AddSearchItemToRoamingSettings(SearchItem search_item)
+        public static void AddSearchItemToRoamingSettings(SearchItem search_item)
         {
 
             //List<SearchItem> search_list = await GetSearchItemsFromRoamingSettings();
@@ -75,6 +76,12 @@ namespace DesafioThingPink
 
             return search_list;
 
+        }
+
+        public static async void ShowMessage(string message)
+        {
+            var dialog = new MessageDialog(message);
+            await dialog.ShowAsync();
         }
     }
 }

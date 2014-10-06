@@ -29,8 +29,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ImageItemDesign.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ObservableCollections.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchItemDesign.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ImageDetail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\badgelogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\thingpinklogo.png" />
     <Content Include="$(MSBuildThisFileDirectory)Common\ReadMe.txt" />
   </ItemGroup>
 </Project>

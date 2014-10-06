@@ -16,8 +16,19 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="DesafioThingPink.Windows.App">
       <m2:VisualElements DisplayName="DesafioThingPink.Windows" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="DesafioThingPink.Windows" ForegroundText="light" BackgroundColor="#464646">
+        <m2:DefaultTile Wide310x150Logo="thingpinklogo.png">
+        </m2:DefaultTile>
+        <m2:LockScreen Notification="badgeAndTileText" BadgeLogo="badgelogo.png" />
         <m2:SplashScreen Image="Assets\SplashScreen.png" />
       </m2:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTasks.BackgroundTask">
+          <BackgroundTasks>
+            <Task Type="timer" />
+            <m2:Task Type="location" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
