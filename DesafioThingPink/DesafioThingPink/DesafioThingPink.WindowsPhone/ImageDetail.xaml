@@ -28,8 +28,8 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="SaveImageOnCameraRoll" Label="Guardar" Click="SaveImageOnCameraRoll_Click" Icon="Save"/>
-                <AppBarButton x:Name="ShareOnFacebook" Label="Partilhar" Click="ShareOnFacebook_Click" Icon="People" />
+                <AppBarButton x:Uid="SaveButton" x:Name="SaveImageOnCameraRoll" Click="SaveImageOnCameraRoll_Click" Icon="Save"/>
+                <AppBarButton x:Uid="ShareButton" x:Name="ShareOnFacebook" Click="ShareOnFacebook_Click" Icon="People" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <!--<AppBarButton x:Uid="AppBarSec" Label="$$get from resource$$" Command="{Binding SomeCommand}">

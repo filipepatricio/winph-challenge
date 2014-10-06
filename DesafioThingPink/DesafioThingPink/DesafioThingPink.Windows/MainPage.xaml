@@ -46,7 +46,7 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Top"/>
                 </Grid>
             </Hub.Header>
-            <HubSection Header="Section 1">
+            <HubSection x:Uid="RecentSearch">
                 <DataTemplate>
                     <ListView x:Name="RecentSearchList" ItemTemplate="{StaticResource SearchItemsTemplate}" IsItemClickEnabled="True" ItemClick="RecentSearchList_ItemClick" Loaded="RecentSearchList_Loaded" />
                 </DataTemplate>
@@ -56,27 +56,27 @@
                     <ImageBrush Stretch="UniformToFill" />
                 </HubSection.Background>
             </HubSection>-->
-            <HubSection Width="500" Header="Section 2" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <HubSection Width="500" x:Uid="Search" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <DataTemplate>
                     <Grid>
                         <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding ImageList}" ItemTemplate="{StaticResource ImageItemsTemplate}" ItemClick="ImageList_ItemClick" Loaded="ImageList_Loaded"  >
                             <ListView.Header>
                                 <Grid Height="185">
-                                    <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local" Loaded="LocationTextBox_Loaded"/>
+                                    <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Local"  Loaded="LocationTextBox_Loaded"/>
                                     <DatePicker x:Name="SinceDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,48,0,0" Loaded="SinceDate_Loaded"/>
                                     <DatePicker x:Name="UntilDate" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Global User Interface" Margin="42,100,0,0" Loaded="UntilDate_Loaded"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" Text="De" VerticalAlignment="Top"/>
-                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Até" VerticalAlignment="Top" FontFamily="Global User Interface" Margin="0,110,0,0"/>
-                                    <Button x:Name="SearchButton" Content="Pesquisar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
+                                    <TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" x:Uid="UntilDate" VerticalAlignment="Top"/>
+                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" x:Uid="SinceDate" VerticalAlignment="Top" FontFamily="Global User Interface" Margin="0,110,0,0"/>
+                                    <Button x:Name="SearchButton" x:Uid="SearchButton" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
                                 </Grid>
                             </ListView.Header>
                         </ListView>
                     </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection Width="520" Header="Section 3">
+            <HubSection Width="520" x:Uid="Map">
                 <DataTemplate>
-                    <local:MapView x:Name="MyMap" Loaded="MyMap_Loaded" />
+                    <local:MapView x:Name="MyMap" Loaded="MyMap_Loaded" Width="520" Height="600"/>
                 </DataTemplate>
             </HubSection>
             

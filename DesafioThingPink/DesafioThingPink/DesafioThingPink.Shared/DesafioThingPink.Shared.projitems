@@ -37,4 +37,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\thingpinklogo.png" />
     <Content Include="$(MSBuildThisFileDirectory)Common\ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\pt-PT\Resources.resw" />
+  </ItemGroup>
 </Project>

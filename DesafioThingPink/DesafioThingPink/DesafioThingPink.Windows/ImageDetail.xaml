@@ -67,8 +67,8 @@
             <AppBarButton Label="Help" Icon="Help" Click="AppBarButton_Click"/>-->
 
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Guardar" Icon="Save" Click="SaveButton_Click"/>
-                <AppBarButton Label="Partilhar" Icon="People" Click="ShareButton_Click"/>
+                <AppBarButton x:Uid="SaveButton" Icon="Save" Click="SaveButton_Click"/>
+                <AppBarButton x:Uid="ShareButton" Icon="People" Click="ShareButton_Click"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

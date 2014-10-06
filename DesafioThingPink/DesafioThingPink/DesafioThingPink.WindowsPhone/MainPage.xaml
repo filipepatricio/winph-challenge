@@ -26,29 +26,29 @@
 	<Grid>
 	
 		<Pivot x:Name="MainPivot" Title="InstaLocation" d:IsHidden="True">
-			<PivotItem x:Name="RecentSearchPivot" Header="Recentes">
+			<PivotItem x:Name="RecentSearchPivot" x:Uid="RecentSearch">
 				<Grid>
 					<ListView x:Name="RecentSearchList" ItemTemplate="{StaticResource SearchItemsTemplate}" IsItemClickEnabled="True" ItemClick="RecentSearchList_ItemClick"/>
 				</Grid>
 			</PivotItem>
-			<PivotItem x:Name="SearchPivot" Header="Pesquisar">
+			<PivotItem x:Name="SearchPivot" x:Uid="Search">
                 <Grid>
                     <ListView x:Name="ImageList" SelectionMode="None" IsItemClickEnabled="True" ItemsSource="{Binding}" ItemTemplate="{StaticResource ImageItemsTemplate}" ItemClick="ImageList_ItemClick"  >
 						<ListView.Header>
                             <Grid VerticalAlignment="Top" Height="161">
-                                <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="Local"/>
+                                <TextBox x:Name="LocationTextBox" TextWrapping="Wrap" VerticalAlignment="Top" x:Uid="Local"/>
                                 <DatePicker x:Name="SinceDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,48,0,0"/>
                                 <DatePicker x:Name="UntilDate" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,48,0,0"/>
-                                <TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" Text="De" VerticalAlignment="Top" FontFamily="Global User Interface"/>
-                                <TextBlock HorizontalAlignment="Right" Margin="0,62,120,0" TextWrapping="Wrap" Text="Até" VerticalAlignment="Top" FontFamily="Global User Interface"/>
-                                <Button x:Name="SearchButton" Content="Pesquisar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="0,62,0,0" TextWrapping="Wrap" x:Uid="SinceDate" VerticalAlignment="Top" FontFamily="Global User Interface"/>
+                                <TextBlock HorizontalAlignment="Right" Margin="0,62,120,0" TextWrapping="Wrap" x:Uid="UntilDate"  VerticalAlignment="Top" FontFamily="Global User Interface"/>
+                                <Button x:Name="SearchButton" x:Uid="SearchButton" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontFamily="Global User Interface" Click="SearchButton_Click"/>
                             </Grid>
                         </ListView.Header>
 					</ListView>
 				</Grid>
 			</PivotItem>
-			<PivotItem x:Name="MapPivot" Header="Mapa">
-                <local:MapView x:Name="MyMap"/>
+			<PivotItem x:Name="MapPivot" x:Uid="Map">
+                <local:MapView x:Name="MyMap" />
             </PivotItem>
 		</Pivot>
 		

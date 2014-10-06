@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -33,7 +34,7 @@ namespace ClassLibrary
         {
             string url = String.Empty;
 
-            url = String.Format("{0}{1}?lat={2}&lng={3}&client_id={4}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), INSTA_CLIENT_ID);
+            url = String.Format("{0}{1}?lat={2}&lng={3}&client_id={4}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(CultureInfo.InvariantCulture), lng.ToString(CultureInfo.InvariantCulture), INSTA_CLIENT_ID);
 
             //TODO: SAVE Search on Roaming settings
             //UniversalAppUtil.AddSearchItemToRoamingSettings(new SearchItem(location, lat, lng, min_timestamp, max_timestamp));
@@ -47,9 +48,9 @@ namespace ClassLibrary
             string url = String.Empty;
 
             if (Math.Round(min_timestamp) < Math.Round(max_timestamp))
-                url = String.Format("{0}{1}?lat={2}&lng={3}&min_timestamp={4}&max_timestamp={5}&client_id={6}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), min_timestamp.ToString(), max_timestamp.ToString(), INSTA_CLIENT_ID);
+                url = String.Format("{0}{1}?lat={2}&lng={3}&min_timestamp={4}&max_timestamp={5}&client_id={6}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(CultureInfo.InvariantCulture), lng.ToString(CultureInfo.InvariantCulture), min_timestamp.ToString(CultureInfo.InvariantCulture), max_timestamp.ToString(CultureInfo.InvariantCulture), INSTA_CLIENT_ID);
             else
-                url = String.Format("{0}{1}?lat={2}&lng={3}&client_id={4}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(), lng.ToString(), INSTA_CLIENT_ID);
+                url = String.Format("{0}{1}?lat={2}&lng={3}&client_id={4}", API_INSTAGRAM_URL, INSTA_SEARCH_URL, lat.ToString(CultureInfo.InvariantCulture), lng.ToString(CultureInfo.InvariantCulture), INSTA_CLIENT_ID);
 
             //TODO: SAVE Search on Roaming settings
             //UniversalAppUtil.AddSearchItemToRoamingSettings(new SearchItem(location, lat, lng, min_timestamp, max_timestamp));
@@ -69,11 +70,19 @@ namespace ClassLibrary
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
 
+
+            string response_string = null;
+            try
+            {
             HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
 
-            string response_string = ApiRequests.GetResponseContent(response);
+            response_string = ApiRequests.GetResponseContent(response);
 
             //Debug.WriteLine(response_string);
+            }catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
 
             return response_string;
         }

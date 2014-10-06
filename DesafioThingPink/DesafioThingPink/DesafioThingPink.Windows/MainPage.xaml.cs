@@ -167,13 +167,13 @@ namespace DesafioThingPink
                 }
                 else
                 {
-                    UniversalAppUtil.ShowMessage("Localizacao nao encontrada");
+                    UniversalAppUtil.ShowMessage(resourceLoader.GetString("LocationNotFound"));
                     return;
                 }
             }
             else
             {
-                UniversalAppUtil.ShowMessage("Introduza uma localizacao");
+                UniversalAppUtil.ShowMessage(resourceLoader.GetString("InsertLocation"));
                 return;
             }
 
@@ -184,7 +184,7 @@ namespace DesafioThingPink
 
             if (max_timestamp - min_timestamp < 0)
             {
-                UniversalAppUtil.ShowMessage("Intervalo de tempo inválido");
+                UniversalAppUtil.ShowMessage(resourceLoader.GetString("TimeIntervalInvalid"));
                 return;
             }
 
@@ -212,7 +212,7 @@ namespace DesafioThingPink
 
                 if (insta_root.data.Count == 0)
                 {
-                    UniversalAppUtil.ShowMessage("Resultados não encontrados");
+                    UniversalAppUtil.ShowMessage(resourceLoader.GetString("ResultsNotFound"));
                 }
 
                 ImageList.ItemsSource = insta_image_collection;
@@ -222,22 +222,6 @@ namespace DesafioThingPink
                 RefreshMap(roaming_search_list);
 
             });
-        }
-
-        private void RefreshMap(List<SearchItem> roaming_search_list)
-        {
-            int i = 1;
-            foreach (SearchItem search_item in roaming_search_list)
-            {
-                BasicGeoposition geopos = new BasicGeoposition();
-                geopos.Latitude = search_item.lat;
-                geopos.Longitude = search_item.lng;
-                Geopoint geopoint = new Geopoint(geopos);
-                MyMap.Center = geopoint;
-                MyMap.Zoom = 7;
-                MyMap.AddPushpin(geopos, i.ToString());
-                i++;
-            }
         }
 
         private void ImageList_ItemClick(object sender, ItemClickEventArgs e)

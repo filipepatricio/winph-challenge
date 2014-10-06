@@ -3,8 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DesafioThingPink">
-	<Application.Resources>
-        <x:String x:Key="BingMapsKey">Ai-3Rv-WRptDNsQDbEOgalK2eQMrpVAcR8Qy4TPBPRyYOSneN2ZWMKrHz7PIHy2X</x:String>
+    <Application.Resources>
         <x:String x:Key="MapServiceToken">Ai-3Rv-WRptDNsQDbEOgalK2eQMrpVAcR8Qy4TPBPRyYOSneN2ZWMKrHz7PIHy2X</x:String>
         <x:String x:Key="FacebookAppId">1533966356840788</x:String>
         <x:String x:Key="FacebookAppSecret">a4df5f6b19347ec2916e36f27542f5f7</x:String>
