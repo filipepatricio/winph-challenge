@@ -46,6 +46,7 @@ namespace DesafioThingPink
         private void RefreshMap(List<SearchItem> roaming_search_list)
         {
             MyMap.MapServiceToken = (string)App.Current.Resources["MapServiceToken"];
+            MyMap.Credentials = (string)App.Current.Resources["MapServiceToken"];
             int i = 1;
             foreach (SearchItem search_item in roaming_search_list)
             {
