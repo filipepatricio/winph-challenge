@@ -150,24 +150,31 @@ namespace DesafioThingPink
             if (!location.Equals(String.Empty))
             {
                 string google_coords_response = await apiRequests.GetGoogleCoords(location);
-                GoogleRootObject google_root = JsonUtil.Deserialize<GoogleRootObject>(google_coords_response);
-
-                if (google_root.status.Equals("OK"))
+                try
                 {
-                    GoogleLocation google_location = google_root.results[0].geometry.location;
-                    lat = google_location.lat;
-                    lng = google_location.lng;
+                    GoogleRootObject google_root = JsonUtil.Deserialize<GoogleRootObject>(google_coords_response);
 
-                    BasicGeoposition geopos = new BasicGeoposition();
-                    geopos.Latitude = lat;
-                    geopos.Longitude = lng;
-                    Geopoint geopoint = new Geopoint(geopos);
-                    MyMap.Center = geopoint;
-                    MyMap.Zoom = 7;
+                    if (google_root.status.Equals("OK"))
+                    {
+                        GoogleLocation google_location = google_root.results[0].geometry.location;
+                        lat = google_location.lat;
+                        lng = google_location.lng;
+
+                        BasicGeoposition geopos = new BasicGeoposition();
+                        geopos.Latitude = lat;
+                        geopos.Longitude = lng;
+                        Geopoint geopoint = new Geopoint(geopos);
+                        MyMap.Center = geopoint;
+                        MyMap.Zoom = 7;
+                    }
+                    else
+                    {
+                        UniversalAppUtil.ShowMessage(resourceLoader.GetString("LocationNotFound"));
+                        return;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    UniversalAppUtil.ShowMessage(resourceLoader.GetString("LocationNotFound"));
                     return;
                 }
             }
@@ -206,20 +213,27 @@ namespace DesafioThingPink
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
             {
 
-                InstaRootObject insta_root = JsonUtil.Deserialize<InstaRootObject>(insta_images_response);
-
-                insta_image_collection = new ObservableImageItems(insta_root.data);
-
-                if (insta_root.data.Count == 0)
+                try
                 {
-                    UniversalAppUtil.ShowMessage(resourceLoader.GetString("ResultsNotFound"));
+                    InstaRootObject insta_root = JsonUtil.Deserialize<InstaRootObject>(insta_images_response);
+
+                    insta_image_collection = new ObservableImageItems(insta_root.data);
+
+                    if (insta_root.data.Count == 0)
+                    {
+                        UniversalAppUtil.ShowMessage(resourceLoader.GetString("ResultsNotFound"));
+                    }
+
+                    ImageList.ItemsSource = insta_image_collection;
+
+                    List<SearchItem> roaming_search_list = await UniversalAppUtil.GetSearchItemsFromRoamingSettings();
+                    RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
+                    RefreshMap(roaming_search_list);
                 }
-
-                ImageList.ItemsSource = insta_image_collection;
-
-                List<SearchItem> roaming_search_list = await UniversalAppUtil.GetSearchItemsFromRoamingSettings();
-                RecentSearchList.ItemsSource = new ObservableSearchItems(roaming_search_list);
-                RefreshMap(roaming_search_list);
+                catch (Exception ex)
+                {
+                    return;
+                }
 
             });
         }

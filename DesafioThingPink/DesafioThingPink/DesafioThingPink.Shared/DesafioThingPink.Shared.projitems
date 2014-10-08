@@ -21,7 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Manager\FacebookManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UniversalAppUtil.cs" />

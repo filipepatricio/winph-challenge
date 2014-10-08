@@ -27,6 +27,11 @@ namespace BackgroundTasks
             // Get a deferral, to prevent the task from closing prematurely 
             // while asynchronous code is still running.
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
+
+            var settings = ApplicationData.Current.LocalSettings;
+
+            double lat = 0.0;
+            double lng = 0.0;
  
             try 
             { 
@@ -49,50 +54,79 @@ namespace BackgroundTasks
                 DateTime currentTime = DateTime.Now; 
  
                 WriteStatusToAppData("Time: " + currentTime.ToString()); 
-                WriteGeolocToAppData(pos); 
+                WriteGeolocToAppData(pos);
+
+                lat = (double)settings.Values["Latitude"];
+                lng = (double)settings.Values["Longitude"];
+
             } 
             catch (UnauthorizedAccessException) 
             { 
                 WriteStatusToAppData("Disabled"); 
-                WipeGeolocDataFromAppData(); 
+                WipeGeolocDataFromAppData();
+
+                GetLastCoordsSearched(ref lat, ref lng);
             } 
             catch (Exception ex) 
             { 
-#if WINDOWS_APP 
-                // If there are no location sensors GetGeopositionAsync() 
-                // will timeout -- that is acceptable. 
-                const int WaitTimeoutHResult = unchecked((int)0x80070102); 
+//#if WINDOWS_APP 
+//                // If there are no location sensors GetGeopositionAsync() 
+//                // will timeout -- that is acceptable. 
+//                const int WaitTimeoutHResult = unchecked((int)0x80070102); 
  
-                if (ex.HResult == WaitTimeoutHResult) // WAIT_TIMEOUT 
-                { 
-                    WriteStatusToAppData("An operation requiring location sensors timed out. Possibly there are no location sensors."); 
-                } 
-                else 
-#endif 
-                { 
+//                if (ex.HResult == WaitTimeoutHResult) // WAIT_TIMEOUT 
+//                { 
+//                    WriteStatusToAppData("An operation requiring location sensors timed out. Possibly there are no location sensors."); 
+//                } 
+//                else 
+//#endif 
+//                { 
                     WriteStatusToAppData(ex.ToString()); 
-                } 
+                //} 
  
-                WipeGeolocDataFromAppData(); 
+                WipeGeolocDataFromAppData();
+
+                GetLastCoordsSearched(ref lat, ref lng);
             } 
             finally 
             { 
                 cts = null;
-
-
             }
 
-            // Download the feed.
-            var feed = await GetInstaImages();
+            try
+            {
 
-            // Update the live tile with the feed items.
-            UpdateTile(feed);
+                // Download the feed.
+                var feed = await GetInstaImages(lat, lng);
+
+                // Update the live tile with the feed items.
+                UpdateTile(feed);
+
+            }catch
+            {
+                return;
+            }
 
             // Inform the system that the task is finished.
             deferral.Complete();
 
 
 
+        }
+
+        private static void GetLastCoordsSearched(ref double lat, ref double lng)
+        {
+            ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+            try
+            {
+                ApplicationDataCompositeValue composite = (ApplicationDataCompositeValue)roamingSettings.Values.LastOrDefault().Value;
+                lat = (double)composite["lat"];
+                lng = (double)composite["lng"];
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void WriteGeolocToAppData(Geoposition pos)
@@ -126,13 +160,12 @@ namespace BackgroundTasks
             }
         } 
 
-        private static async Task<InstaRootObject> GetInstaImages()
+        private static async Task<InstaRootObject> GetInstaImages(double lat, double lng)
         {
-            var settings = ApplicationData.Current.LocalSettings;
+
             string insta_images_response = String.Empty;
             string location = "DeviceLocation";
-            double lat = (double) settings.Values["Latitude"];
-            double lng = (double) settings.Values["Longitude"];
+
             insta_images_response = await apiRequests.GetInstaImages(location, lat, lng);
 
             Debug.WriteLine(insta_images_response);

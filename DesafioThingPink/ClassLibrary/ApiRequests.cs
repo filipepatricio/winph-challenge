@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI.Popups;
 
 namespace ClassLibrary
 {
@@ -74,17 +75,36 @@ namespace ClassLibrary
             string response_string = null;
             try
             {
-            HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
 
-            response_string = ApiRequests.GetResponseContent(response);
+                response_string = ApiRequests.GetResponseContent(response);
 
-            //Debug.WriteLine(response_string);
-            }catch (Exception e)
+                //Debug.WriteLine(response_string);
+            }
+            catch (WebException webex)
             {
-                Debug.WriteLine(e.Message);
+                Debug.WriteLine(webex.Message);
+                ShowMessage(webex.Message + " Please check your network connection");
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(ex.Message);
             }
 
             return response_string;
+        }
+
+        public static async void ShowMessage(string message)
+        {
+            try
+            {
+                var dialog = new MessageDialog(message);
+                await dialog.ShowAsync();
+            }
+            catch 
+            {
+                Debug.WriteLine("BackgroundTask running");
+            }
         }
 
     }
