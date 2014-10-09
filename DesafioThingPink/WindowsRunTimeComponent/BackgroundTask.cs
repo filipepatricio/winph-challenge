@@ -65,7 +65,7 @@ namespace BackgroundTasks
                 WriteStatusToAppData("Disabled"); 
                 WipeGeolocDataFromAppData();
 
-                GetLastCoordsSearched(ref lat, ref lng);
+                GetLastCoordsSearched(ref lat, ref lng, taskInstance);
             } 
             catch (Exception ex) 
             { 
@@ -86,7 +86,7 @@ namespace BackgroundTasks
  
                 WipeGeolocDataFromAppData();
 
-                GetLastCoordsSearched(ref lat, ref lng);
+                GetLastCoordsSearched(ref lat, ref lng, taskInstance);
             } 
             finally 
             { 
@@ -114,7 +114,7 @@ namespace BackgroundTasks
 
         }
 
-        private static void GetLastCoordsSearched(ref double lat, ref double lng)
+        private static void GetLastCoordsSearched(ref double lat, ref double lng, IBackgroundTaskInstance taskInstance)
         {
             ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
             try
@@ -125,6 +125,8 @@ namespace BackgroundTasks
             }
             catch
             {
+                BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
+                deferral.Complete();
                 return;
             }
         }
